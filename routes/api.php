@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\Api\CommentController;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Employee;
+use App\Http\Controllers\Api\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,5 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/test', function(){
-    return ['message' => 'Bienvenue API'];
+    return ['message' => 'Bienvenue Itokiana'];
 });
+
+// Route::get('/post/index', [PostController::class, 'index']);
+// Route::post('/post/store', [PostController::class, 'store']);
+
+Route::get('/employee/getAll', [EmployeeController::class, 'getEmployee']);
