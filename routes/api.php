@@ -30,3 +30,4 @@ Route::get('/test', function(){
 // Route::post('/post/store', [PostController::class, 'store']);
 
 Route::get('/employee/getAll', [EmployeeController::class, 'getEmployee']);
+Route::post('/employee/addEmployee', [EmployeeController::class, 'addEmployee']);

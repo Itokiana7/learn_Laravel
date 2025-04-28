@@ -1,0 +1,27 @@
+
+<div class="container">
+  <form>
+    <div class="form-group">
+      
+    </div>
+  </form>
+
+    <table class="table">
+        <thead>
+          <tr>
+            <!-- <th scope="col">#</th> -->
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Salary</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employees of employee">
+            <!-- <th scope="row">{{employees.id}}</th> -->
+            <td>{{employees.name}}</td>
+            <td>{{employees.age}}</td>
+            <td>{{employees.salary}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
