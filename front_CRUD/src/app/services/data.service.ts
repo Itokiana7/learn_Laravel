@@ -13,4 +13,12 @@ export class DataService {
   public getEmployer() : Observable<Employee[]>{
     return this.httpClient.get<Employee[]>('http://127.0.0.1:8000/api/employee/getAll');
   }
+
+  public addEmployer(employee : Employee) : Observable<Employee[]>{
+    return this.httpClient.post<Employee[]>('http://127.0.0.1:8000/api/employee/addEmployee', employee);
+  }
+
+  public delEmployer(id : number) : Observable<any>{
+    return this.httpClient.delete(`http://127.0.0.1:8000/api/employee/deleteEmployee/${id}`);
+  }
 }

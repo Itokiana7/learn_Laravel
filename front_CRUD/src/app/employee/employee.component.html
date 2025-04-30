@@ -1,10 +1,32 @@
 
 <div class="container">
-  <form>
+  <form [formGroup]="employeeInsert" (ngSubmit)="insertEmployee()">
     <div class="form-group">
-      
+      <label for="name">Name</label>
+      <input type="text" name="name" formControlName="name" class="form-control" placeholder="Name">
+      <p class="text-danger" *ngIf="employeeInsert.controls['name'].invalid && employeeInsert.controls['name'].touched">
+        Name is required
+      </p>
+    </div>
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input type="text" name="age" formControlName="age" class="form-control" placeholder="Age">
+      <p class="text-danger" *ngIf="employeeInsert.controls['age'].invalid && employeeInsert.controls['age'].touched">
+        Age is required
+      </p>
+    </div>
+    <div class="form-group">
+      <label for="salary">Salary</label>
+      <input type="text" name="salary" formControlName="salary" class="form-control" placeholder="Salary">
+      <p class="text-danger" *ngIf="employeeInsert.controls['salary'].invalid && employeeInsert.controls['salary'].touched">
+        Salary is required
+      </p>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary">Insert</button>
     </div>
   </form>
+  <div *ngIf="invalid" class="alert alert-danger" role="alert">Formulaire Invalide</div>
 
     <table class="table">
         <thead>
@@ -13,6 +35,7 @@
             <th scope="col">Name</th>
             <th scope="col">Age</th>
             <th scope="col">Salary</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -21,6 +44,7 @@
             <td>{{employees.name}}</td>
             <td>{{employees.age}}</td>
             <td>{{employees.salary}}</td>
+            <td><button class="btn btn-danger" (click)="deleteEmployee(employees.id)">delete</button></td>
           </tr>
         </tbody>
       </table>

@@ -43,11 +43,63 @@ class EmployeeController extends Controller
         //creation de l'employer
         $employee = Employee::create($validatedData);
             return response()->json([
-                'sucess' => true,
+                'success' => true,
                 'status' => 200,
                 'message' => 'Employé créé avec succès.',
                 'data' => $employee
             ],200);
 
+    }
+
+    public function deleteEmployee(Request $request){
+        //récupérer ID employee
+        $id = $request->id;
+        $employee = Employee::where('id', $id)->first();
+        
+        //vérification si employer exist
+        if(!$employee){
+            return response()->json([
+                'success' => false,
+                'status' => 404,
+                'message' => 'Cette Employé n\'exist pas.',
+            ]);    
+        }
+
+        //suppression Employer
+        $employee->delete();
+        return response()->json([
+            'sucess' => true,
+            'status' => 200,
+            'message' => 'Employé supprimé avec succès.',
+        ]);
+    }
+
+    public function updateEmployee(Request $request, $id){
+        $employee = Employee::find($id);
+
+        if (!$employee) {
+            return response()->json([
+                'success' => false,
+                'status' => 404,
+                'message' => 'Employé introuvable.'
+            ], 404);
+        }
+
+         // Validation des champs
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:employees,email,' . $id, // Ignore l'employé actuel
+        'age' => 'nullable|integer|min:18'
+    ]);
+
+    //  // Mise à jour des données
+    //  $employee->update($validated);
+
+    //  return response()->json([
+    //      'success' => true,
+    //      'status' => 200,
+    //      'message' => 'Employé mis à jour avec succès.',
+    //      'data' => $employee
+    //  ]);
     }
 }
