@@ -1,3 +1,4 @@
+import { EditComponent } from './edit/edit.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { Routes } from '@angular/router';
 

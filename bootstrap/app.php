@@ -10,8 +10,6 @@
 | the IoC container for the system binding all of the various parts.
 |
 */
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE');
 
 
 $app = new Illuminate\Foundation\Application(

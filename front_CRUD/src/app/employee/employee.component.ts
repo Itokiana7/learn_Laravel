@@ -4,13 +4,15 @@ import { Employee } from '../interfaces/employee';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { EditComponent } from '../edit/edit.component';
 
 @Component({
   selector: 'app-employee',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EditComponent
   ],
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.scss'
@@ -20,6 +22,7 @@ export class EmployeeComponent implements OnInit,OnDestroy {
   employeeInsert! : FormGroup;
   employee : Employee[] = [];
 _dataService = inject(DataService);
+show : boolean = false;
 
 private subscription! : Subscription; 
 
@@ -36,6 +39,10 @@ constructor(public fb : NonNullableFormBuilder){
 ngOnInit(): void {
    this.getEmployee();
  }
+
+showPopup(){
+  this.show = !this.show;
+}
 
  public getEmployee(){
   this.subscription = this._dataService.getEmployer().subscribe(

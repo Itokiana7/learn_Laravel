@@ -1,0 +1,29 @@
+    <div class="overlay" *ngIf="show">
+        <div class="popup-container">
+            <div class="popup-header">
+              <h5>EDIT EMPLOYEE</h5>
+              <button type="button" class="btn-close-icon" (click)="closePopup()">&times;</button>
+            </div>
+            <div class="mb-3">
+              <label for="grade" class="form-label">NAME</label>
+              <input type="text" class="form-control" id="grade" value="7">
+            </div>
+        
+            <div class="mb-3">
+                <label for="grade" class="form-label">AGE</label>
+                <input type="text" class="form-control" id="grade" value="7">
+              </div>
+        
+            <div class="mb-3">
+              <label for="displayOrder" class="form-label">SALARY</label>
+              <input type="text" class="form-control" id="displayOrder" value="1">
+            </div>
+            <div class="popup-footer">
+              <button type="button" class="btn btn-close" (click)="closePopup()">Close</button>
+              <button type="button" class="btn btn-update text-white" (click)="updatePopup()">Update</button>
+            </div>
+          </div>
+        
+    
+    </div>
+    

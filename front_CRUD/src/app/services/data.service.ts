@@ -21,4 +21,8 @@ export class DataService {
   public delEmployer(id : number) : Observable<any>{
     return this.httpClient.delete(`http://127.0.0.1:8000/api/employee/deleteEmployee/${id}`);
   }
+
+  public getOneEmployer() : Observable<Employee[]>{
+    return this.httpClient.get<Employee[]>('http://127.0.0.1:8000/api/employee/getAll');
+  }
 }
