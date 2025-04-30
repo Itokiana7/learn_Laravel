@@ -33,3 +33,5 @@ Route::get('/employee/getAll', [EmployeeController::class, 'getEmployee']);
 Route::post('/employee/addEmployee', [EmployeeController::class, 'addEmployee']);
 Route::delete('/employee/deleteEmployee/{id}', [EmployeeController::class, 'deleteEmployee']);
 Route::patch('/employee/updateEmployee/{id}', [EmployeeController::class, 'updateEmployee']);
+Route::get('/employee/getOneEmployee/{id}', [EmployeeController::class, 'getOneEmployee']);
+

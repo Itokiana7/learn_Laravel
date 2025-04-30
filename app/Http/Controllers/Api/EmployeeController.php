@@ -88,18 +88,31 @@ class EmployeeController extends Controller
          // Validation des champs
     $validated = $request->validate([
         'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:employees,email,' . $id, // Ignore l'employé actuel
-        'age' => 'nullable|integer|min:18'
+        'age' => 'required|integer', // Ignore l'employé actuel
+        'salary' => 'required|integer'
     ]);
 
-    //  // Mise à jour des données
-    //  $employee->update($validated);
+     // Mise à jour des données
+     $employee->update($validated);
 
-    //  return response()->json([
-    //      'success' => true,
-    //      'status' => 200,
-    //      'message' => 'Employé mis à jour avec succès.',
-    //      'data' => $employee
-    //  ]);
+     return response()->json([
+         'success' => true,
+         'status' => 200,
+         'message' => 'Employé mis à jour avec succès.',
+         'data' => $employee
+     ]);
+    }
+
+    public function getOneEmployee(Request $request){
+        $id = $request->id;
+        $employee = Employee::where('id', $id)->first();
+        if(!$employee){
+            return response()->json([
+                "success" => false,
+                "status" => 404,
+                "message" => "Employé introuvable"
+            ]);
+        }
+        return response()->json($employee);
     }
 }
