@@ -21,8 +21,13 @@ export class EmployeeComponent implements OnInit,OnDestroy {
   invalid : boolean = false;  
   employeeInsert! : FormGroup;
   employee : Employee[] = [];
+  selectedEmployee ! :any;
 _dataService = inject(DataService);
 show : boolean = false;
+id !: number;
+name !: string;
+age !: number;
+salary !: number;
 
 private subscription! : Subscription; 
 
@@ -37,14 +42,20 @@ constructor(public fb : NonNullableFormBuilder){
 
 
 ngOnInit(): void {
-   this.getEmployee();
+   this.getAllEmployee();
  }
 
-showPopup(){
+ showPopup(){
   this.show = !this.show;
 }
 
- public getEmployee(){
+editEmployee(employee : any){
+  this.selectedEmployee = {...employee};
+  console.log(this.selectedEmployee);
+  this.show = !this.show;
+}
+
+ getAllEmployee(){
   this.subscription = this._dataService.getEmployer().subscribe(
     (data) =>{
       this.employee = data;
@@ -58,14 +69,14 @@ showPopup(){
   )
  }
 
- public insertEmployee(){
+ insertEmployee(){
   if(this.employeeInsert.value == ""){
         this.invalid = true;
   }
   this.invalid = false;
   this.subscription = this._dataService.addEmployer(this.employeeInsert.value).subscribe(
     (data) => {
-      this.getEmployee();
+      this.getAllEmployee();
       this.employeeInsert.reset();
     },
     (error) => {
@@ -77,15 +88,21 @@ showPopup(){
   deleteEmployee(id : number){
     this.subscription = this._dataService.delEmployer(id).subscribe(
       (data) => {
-          this.getEmployee();
+          this.getAllEmployee();
           console.log(data);
       },
       (error) => {
         console.log(error);
       }
-    )
-    
+    ) 
   }
+
+  updateEmployee(){
+    setTimeout(()=>{
+      this.show = !this.show;
+    }, 1000);
+    this.getAllEmployee();
+    }
 
 ngOnDestroy(): void {
     if(this.subscription){

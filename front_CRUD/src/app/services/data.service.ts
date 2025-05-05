@@ -17,12 +17,17 @@ export class DataService {
   public addEmployer(employee : Employee) : Observable<Employee[]>{
     return this.httpClient.post<Employee[]>('http://127.0.0.1:8000/api/employee/addEmployee', employee);
   }
+  
 
   public delEmployer(id : number) : Observable<any>{
     return this.httpClient.delete(`http://127.0.0.1:8000/api/employee/deleteEmployee/${id}`);
   }
 
-  public getOneEmployer() : Observable<Employee[]>{
-    return this.httpClient.get<Employee[]>('http://127.0.0.1:8000/api/employee/getAll');
+  public getOneEmployer(id : number) : Observable<any>{
+    return this.httpClient.get<any>(`http://127.0.0.1:8000/api/employee/getOneEmployee/${id}`);
+  }
+
+  public updateEmployer(employee : Employee, id : number) : Observable<Employee>{
+    return this.httpClient.patch<Employee>(`http://127.0.0.1:8000/api/employee/updateEmployee/${id}`, employee);
   }
 }

@@ -46,10 +46,12 @@
             <td>{{employees.salary}}</td>
             <td>
               <button class="btn btn-danger" (click)="deleteEmployee(employees.id)">Delete</button>
-              <button class="btn btn-primary margin" (click)="showPopup()">Edit</button>
+              <button class="btn btn-primary margin" (click)="editEmployee(employees)">Edit</button>
+              <app-edit [employee]="selectedEmployee" [show]="show" (update)="updateEmployee()" (close)="showPopup()" [id]="id"></app-edit>
+
             </td>
           </tr>
         </tbody>
       </table>
 </div>
-<app-edit [show]="show" (close)="showPopup()" ></app-edit>
+
