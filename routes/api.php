@@ -37,5 +37,5 @@ Route::patch('/employee/updateEmployee/{id}', [EmployeeController::class, 'updat
 Route::get('/employee/getOneEmployee/{id}', [EmployeeController::class, 'getOneEmployee']);
 
 Route::post('/register', [AuthController::class, 'Register']);
-// Route::post('/login', [AuthController::class, 'Login']);
+Route::post('/login', [AuthController::class, 'Login']);
 
