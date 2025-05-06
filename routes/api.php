@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Employee;
 use App\Http\Controllers\Api\EmployeeController;
+use App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +35,7 @@ Route::post('/employee/addEmployee', [EmployeeController::class, 'addEmployee'])
 Route::delete('/employee/deleteEmployee/{id}', [EmployeeController::class, 'deleteEmployee']);
 Route::patch('/employee/updateEmployee/{id}', [EmployeeController::class, 'updateEmployee']);
 Route::get('/employee/getOneEmployee/{id}', [EmployeeController::class, 'getOneEmployee']);
+
+Route::post('/register', [AuthController::class, 'Register']);
+// Route::post('/login', [AuthController::class, 'Login']);
 
