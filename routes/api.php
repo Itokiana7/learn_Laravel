@@ -38,4 +38,5 @@ Route::get('/employee/getOneEmployee/{id}', [EmployeeController::class, 'getOneE
 
 Route::post('/register', [AuthController::class, 'Register']);
 Route::post('/login', [AuthController::class, 'Login']);
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'Logout']);
 

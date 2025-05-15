@@ -1,0 +1,20 @@
+<div class="form-wrapper">
+    <form class="form" [formGroup]="registerInput" (ngSubmit)="onRegister()">
+        <span class="title">Register</span>
+        
+        <label for="username" class="label" >Name</label>
+        <input type="text" id="username" name="username" formControlName="name" class="input">
+        <p class="error" *ngIf="registerInput.controls['name'].invalid && registerInput.controls['name'].touched">name is required</p>
+        
+        <label for="email" class="label">Email</label>
+        <input type="email" id="email" name="email" formControlName="email" class="input">
+        <p class="error" *ngIf="registerInput.controls['email'].invalid && registerInput.controls['email'].touched">email is required</p>
+
+        <label for="password" class="label">Password</label>
+        <input type="password" id="password" name="password" formControlName="password" class="input">
+        <p class="error" *ngIf="registerInput.controls['password'].invalid && registerInput.controls['password'].touched">password is required</p>
+
+        <button type="submit" class="submit">Register</button>
+      </form>
+    
+</div>

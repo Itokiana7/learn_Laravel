@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -24,7 +25,7 @@ class AuthController extends Controller
                 'succes' => false,
                 'status' => 500,
                 'massage' => 'Verifier les information entrer'
-            ]);
+            ], 401);
         }
     //si employee exist deja
         $existingUser = User::where('email', $validation['email'])->first();
@@ -34,7 +35,7 @@ class AuthController extends Controller
                 'succes' => false,
                 'status' => 500,
                 'massage' => 'Utilisateur exist deja'
-            ]);
+            ], 401);
         }
 
     //creation User
@@ -51,7 +52,7 @@ class AuthController extends Controller
             'succes' => true,
             'status' => 200,
             'massage' => 'Utilisateur créer avec success',
-        ]);
+        ], 200);
     }
 
     public function Login(Request $request){
@@ -64,9 +65,9 @@ class AuthController extends Controller
         if(!$user || !Hash::check($request->password, $user->password)){
             return response()->json([
                 'succes' => false,
-                'status' => 500,
+                'status' => 401,
                 'massage' => 'Verifier l\'email ou le mot de passe'
-            ]);
+            ], 401);
         }
 
         //creation du token
@@ -78,6 +79,16 @@ class AuthController extends Controller
             'token' => $token,
             'user' => $user,
             'message' => 'Utilisateur connecter avec success'
-        ]);
+        ], 200);
+    }
+
+    public function Logout(Request $request){
+        $request->user()->currentAccessToken()->delete();
+        
+        return response()->json([
+            'status' => 200,
+            'succes' => true,
+            'message' => 'Utilisateur deconnecter avec success'
+        ], 200);
     }
 }

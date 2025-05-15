@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EditComponent } from '../edit/edit.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee',
@@ -23,6 +24,7 @@ export class EmployeeComponent implements OnInit,OnDestroy {
   employee : Employee[] = [];
   selectedEmployee ! :any;
 _dataService = inject(DataService);
+_router = inject(Router);
 show : boolean = false;
 id !: number;
 name !: string;
@@ -102,6 +104,29 @@ editEmployee(employee : any){
       this.show = !this.show;
     }, 1000);
     this.getAllEmployee();
+    }
+
+    logout(){
+      //effacer token dans sessionStorage
+      sessionStorage.removeItem('token');
+
+      //effacer token dans base de donnée
+this.subscription = this._dataService.logout().subscribe(
+  (data) =>{
+    console.log("Deconnexion OK");
+    //Supprimer token dans session storage
+      sessionStorage.removeItem('token');
+      
+      //naviger vers la page de login
+      this._router.navigate(['/login']);
+  },
+  (error) =>{
+    console.log("Erreur lors du deconnexion");
+  }
+  )
+
+      
+
     }
 
 ngOnDestroy(): void {
