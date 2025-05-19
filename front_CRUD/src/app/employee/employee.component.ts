@@ -61,7 +61,6 @@ editEmployee(employee : any){
   this.subscription = this._dataService.getEmployer().subscribe(
     (data) =>{
       this.employee = data;
-      console.log(this.employee);
     },
 
     (error) => {
@@ -106,28 +105,7 @@ editEmployee(employee : any){
     this.getAllEmployee();
     }
 
-    logout(){
-      //effacer token dans sessionStorage
-      sessionStorage.removeItem('token');
-
-      //effacer token dans base de donnée
-this.subscription = this._dataService.logout().subscribe(
-  (data) =>{
-    console.log("Deconnexion OK");
-    //Supprimer token dans session storage
-      sessionStorage.removeItem('token');
-      
-      //naviger vers la page de login
-      this._router.navigate(['/login']);
-  },
-  (error) =>{
-    console.log("Erreur lors du deconnexion");
-  }
-  )
-
-      
-
-    }
+   
 
 ngOnDestroy(): void {
     if(this.subscription){

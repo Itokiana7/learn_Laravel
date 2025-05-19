@@ -36,7 +36,7 @@ export class LoginComponent implements OnDestroy{
         console.log(this.loginInput.value);
         console.log('Login réussi', response);
         sessionStorage.setItem('token',response.token);
-        this._router.navigate(['/crudEmployee']);
+        this._router.navigate(['/dashboard/Info']);
         this.loginInput.reset();
       },
       error : (error) =>{

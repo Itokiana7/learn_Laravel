@@ -4,13 +4,12 @@ import { Routes } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { authGuard } from './guards/auth.guard';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { InfoComponent } from './info/info.component';
+import { ServicesComponent } from './services/services.component';
 
 export const routes: Routes = [
-    {
-        path:'crudEmployee',
-        component:EmployeeComponent,
-        canActivate: [authGuard]
-    },
+    
     {
         path:'register',
         component: RegisterComponent
@@ -18,6 +17,17 @@ export const routes: Routes = [
     {
         path:'login',
         component: LoginComponent
+    },
+    {
+        path:'dashboard',
+        component: DashboardComponent,
+        canActivate: [authGuard],
+        children:[
+            {path:'dashboard', redirectTo:'dashboard/Info', pathMatch:'full'},
+            {path:'Info', component: InfoComponent},
+            {path:'Employee', component: EmployeeComponent},
+            {path:'Services', component: ServicesComponent}
+        ]
     },
     {
         path:'',
